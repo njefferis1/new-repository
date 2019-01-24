@@ -1,0 +1,54 @@
+﻿@{
+    //this file is processed PHYSICALLY from top to bottom
+
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "TextBoxes";
+
+    //capture the data returned to the web app (web server)
+    //this data is in strings
+    var leftside = Request.Form["leftinput"]; //if the control name does NOT EXIST, the result is null
+    var rightside = Request.Form["rightinput"];
+    var thebutton = Request.Form["formbutton"];  //value attribute
+
+
+}
+@section banner{
+    <h1>Forms and Razor Samples</h1>
+}
+<!-- body content area -->
+<!-- processing logic -->
+@if (IsPost )
+{
+    if(thebutton.Equals("left"))
+    {
+        <p> Hello @leftside . How are you today?</p>
+    }
+    else
+    {
+        <p> I see your favourite color is @rightside .</p>
+    }
+}
+else
+{
+    // any initialization logic to fill any of your form controls
+    <p>Enter the requested information.</p>
+}
+
+<!-- form -->
+    <form id="theform" method="post">
+        <div class="col-md-6">
+            <label for="leftinput">Your Name:</label>
+            <input type="text" id="leftinput" name="leftinput" placeholder="enter your name" value="@leftside"/>
+            <button type="submit" id="formbutton" name="formbutton" value="left" class="btn">Press Left</button>
+        </div>
+        <div class="col-md-6">
+            <label for="rightinput">Your Favourite Colour:</label>
+            <input type="text" id="rightinput" name="rightinput" placeholder="enter your color" value="@rightside"/>
+            <button type="submit" id="formbutton" name="formbutton" value="right" class="btn">Press Right</button>
+        </div>
+    </form>
+
+@section footer{
+    &copy; CPSC1517 NAIT 2019, all rights reserved.
+}
+
