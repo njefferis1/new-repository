@@ -13,7 +13,7 @@
 
 }
 @section banner{
-    <h1>Forms and Razor Samples</h1>
+    <h1>Text Boxes</h1>
 }
 <!-- body content area -->
 <!-- processing logic -->
@@ -23,9 +23,14 @@
     {
         <p> Hello @leftside . How are you today?</p>
     }
-    else
+    else if (thebutton.Equals("right"))
     {
         <p> I see your favourite color is @rightside .</p>
+    }
+    else //reset case
+    {
+        leftside = "";
+        rightside = "";
     }
 }
 else
@@ -36,15 +41,22 @@ else
 
 <!-- form -->
     <form id="theform" method="post">
-        <div class="col-md-6">
-            <label for="leftinput">Your Name:</label>
-            <input type="text" id="leftinput" name="leftinput" placeholder="enter your name" value="@leftside"/>
-            <button type="submit" id="formbutton" name="formbutton" value="left" class="btn">Press Left</button>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="leftinput">Your Name:</label>
+                <input type="text" id="leftinput" name="leftinput" placeholder="enter your name" value="@leftside" />
+                <button type="submit" id="formbutton" name="formbutton" value="left" class="btn">Press Left</button>
+            </div>
+            <div class="col-md-6">
+                <label for="rightinput">Your Favourite Colour:</label>
+                <input type="text" id="rightinput" name="rightinput" placeholder="enter your color" value="@rightside" />
+                <button type="submit" id="formbutton" name="formbutton" value="right" class="btn">Press Right</button>
+            </div>
         </div>
-        <div class="col-md-6">
-            <label for="rightinput">Your Favourite Colour:</label>
-            <input type="text" id="rightinput" name="rightinput" placeholder="enter your color" value="@rightside"/>
-            <button type="submit" id="formbutton" name="formbutton" value="right" class="btn">Press Right</button>
+        <div class="row">
+            <div class="col-md-offset-5">
+                <button type="submit" id="formbutton" name="formbutton" value="reset" class="btn">Reset</button>
+            </div>
         </div>
     </form>
 
