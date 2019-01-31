@@ -1,9 +1,58 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
+    Page.Title = "DropDown (select)";
+    var pagechoice = Request.Form["pageselection"];
 }
 @section banner{
-    <h1>Drop Down</h1>
+    <h1>Drop Down (select)</h1>
 }
+
+@if (IsPost)
+{
+    switch (pagechoice.ToUpper())
+    {
+        case "TEXTBOXES":
+            {
+                //use relative addressing to access the appropriate page
+                //use the .Redirect(page) method of the response object
+                Response.Redirect("TextBoxes.cshtml");
+                break;
+            }
+        case "RADIOBUTTONS":
+            {
+                Response.Redirect("RadioButtons.cshtml");
+                break;
+            }
+        case "CHECKBOXES":
+            {
+                Response.Redirect("CheckBoxes.cshtml");
+                break;
+            }
+        default:
+            {
+                //not selecting a apge in essence means that the prompt selection is still showing
+                <p><span style="color:firebrick"><strong>Make a selection from the list of samples available.</strong></span></p>
+                break;
+            }
+    }
+}
+
+<form id="theform" method="post">
+    <div class="row">
+        <div class="col-md-offset-4">
+            <label for="pageselection">Select your sample:</label>
+            &nbsp;&nbsp;
+            <select id="pageselection" name="pageselection">
+                <option value="">select ...</option>
+                <option value="TextBoxes">TextBoxes</option>
+                <option value="RadioButtons">RadioButtons</option>
+                <option value="Checkboxes">Checkboxes</option>
+            </select>
+            &nbsp;&nbsp;
+            <button type="submit" id="formbutton" name="formbutton" value="submit" class="btn btn-primary">Go To ...</button>
+        </div>
+    </div>
+</form>
 @section footer{
     &copy; CPSC1517 NAIT 2019, all rights reserved.
 }

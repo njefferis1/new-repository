@@ -4,6 +4,7 @@
 
     var language = Request.Form["languagegroup"];
     var script = Request.Form["scriptgroup"];
+    var thebutton = Request.Form["formbutton"];
     //the first time through language and script will be null
     //this wil cause a problem in the check for the radiobutton test that retains the radiobutton selection
     //to fix the problem assign an empty string to the variables
@@ -22,28 +23,37 @@
 
 @if (IsPost)
 {
-    //demonstrate validation is possible
-    if (string.IsNullOrEmpty(language) || string.IsNullOrEmpty(script))
+    //decide which button pressed
+    if (thebutton.Equals("Clear"))
     {
-        <p><span style="color:firebrick"><strong>Choose from both language and scripting.</strong></span></p>
+        language = "";
+        script = "";
     }
     else
     {
-        if (language.Equals("C#"))
+        //demonstrate validation is possible
+        if (string.IsNullOrEmpty(language) || string.IsNullOrEmpty(script))
         {
-            <p>You will greatly enjoy CPSC1517 because we use C#</p>
+            <p><span style="color:firebrick"><strong>Choose from both language and scripting.</strong></span></p>
         }
         else
         {
-            <p>Toobad.  CPSC1517 uses C#</p>
-        }
-        if (script.Equals("Razor"))
-        {
-            <p>You will greatly enjoy CPSC1517 because we use Razor</p>
-        }
-        else
-        {
-            <p>Toobad.  CPSC1517 uses Razor</p>
+            if (language.Equals("C#"))
+            {
+                <p>You will greatly enjoy CPSC1517 because we use C#</p>
+            }
+            else
+            {
+                <p>Toobad.  CPSC1517 uses C#</p>
+            }
+            if (script.Equals("Razor"))
+            {
+                <p>You will greatly enjoy CPSC1517 because we use Razor</p>
+            }
+            else
+            {
+                <p>Toobad.  CPSC1517 uses Razor</p>
+            }
         }
     }
 }
@@ -65,7 +75,8 @@
     </div>
     <div class="row">
         <div class="col-md-offset-1">
-            <button type="submit" id="formbutton" name="formbutton" value="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="formbutton" name="formbutton" value="submit" class="btn btn-primary">Submit</button>&nbsp;&nbsp;
+            <button type="submit" id="formbutton" name="formbutton" value="Clear" class="btn">Clear</button>
         </div>
     </div>
 </form>
