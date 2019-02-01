@@ -21,5 +21,14 @@
                 <li><a href="@Href("~/Controls/DropDown.cshtml")">DropDown (select)</a></li>
             </ul>
         </li>
+        <!-- dropdown menu (submenu) -->
+        <li class="dropdown">
+            <!-- place the dropdown root menu item at the root-->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">DBPages <b class="caret"></b></a>
+            <!-- this unordered list is the dropdown menu-->
+            <ul class="dropdown-menu">
+                <li><a href="@Href("~/DBPages/SingleQuery.cshtml")">SingleQuery</a></li>
+            </ul>
+        </li>
     </ul>
 </div>
