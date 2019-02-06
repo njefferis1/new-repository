@@ -5,6 +5,7 @@
     var searcharg = Request.Form["searcharg"];
     var regionid = "";
     var description = "";
+    var thebutton = Request.Form["formbutton"];
 
     //remember the first pass, your incoming data value will be null because the form has yet to be displayed
     if (string.IsNullOrEmpty(searcharg))
@@ -36,11 +37,45 @@
     <h1>DataBase: Single Query</h1>
 }
 
+@if (IsPost)
+{
+    //determine if submit button is pressed
+    if (thebutton.Equals("clear"))
+    {
+        searcharg = "0";
+        regionid = "";
+        description = "";
+    }
+    else
+    {
+        //determine if there is anything to display
+        //for .QuerySingle() use xxxx == null
+        //for .Query() use xxxx.Count() == 0
+        if(results == null)
+        {
+            //region id not on database
+            <p><span style="color:blue">Region id not found.</span></p>
+            regionid = "";
+            description = "";
+        }
+        else
+        {
+            //region record was found on the database
+            //there are 2 techniques to access data off your resulting database record
+            //a) using an index:  xxxx[index] where index is the column index
+            //b) using the column title property name: xxxx.columntitlepropertyname
+            regionid = results[0].ToString(); //1st column on record: RegionID
+            description = results.RegionDescription; //2nd column RegionDecription
+        }
+    }
+
+}
+
 <form id="theform" method="post">
     <div class="row">
         <div class="col-md-4">
             <label for="searcharg">Enter RegionID:</label>
-            <input type="text" id="searcharg" name="searcharg" placeholder="enter region id" value="@searcharg" />
+            <input type="number" id="searcharg" name="searcharg" placeholder="enter region id" step="1" min="0" value="@searcharg" />
             <br />
             <button type="submit" id="formbutton" name="formbutton" value="search" class="btn btn-primary">Search</button>
             &nbsp;&nbsp;
