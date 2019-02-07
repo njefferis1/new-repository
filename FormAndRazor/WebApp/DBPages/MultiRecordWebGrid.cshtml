@@ -22,7 +22,7 @@
     //this value will be used in titling the WebGrid display
     var categoryname = db.QueryValue(scalarcommand, categoryid);
 
-    var querycommand = "SELECT ProductID, ProductName, UnitPrice, UnitsInStock, Discontinued "
+    var querycommand = "SELECT ProductID, ProductName, UnitPrice, UnitsInStock, Discontinued, GetDate() DATE "
                         + "FROM Products "
                         + "WHERE CategoryID = @0 "
                         + "ORDER BY 2";
@@ -30,8 +30,9 @@
 
     //create an instance of WebGrid
     //notice the collection is passed at the time of instantiation
+    //you can set the number of lines per page using rowsPerPage
 
-    var gridinstance = new WebGrid(results);
+    var gridinstance = new WebGrid(results, rowsPerPage:5);
 
 }
 @section banner{
@@ -41,9 +42,25 @@
 <div class="row">
     <div class="col-md-12">
         <span style="font-size:x-large"><strong>Products for @categoryname</strong></span>
-        <!--Display the WebGrid instance in its default display-->
+        <!--Display the WebGrid instance in its default display
+                    default is xxxx.GetHtml() -->
         @gridinstance.GetHtml(
-            tableStyle: "table table-bordered table-striped table-hover")
+            tableStyle: "table table-bordered table-striped table-hover", mode: WebGridPagerModes.All, firstText: "Start", lastText: "End", 
+            columns: gridinstance.Columns(
+                gridinstance.Column(columnName: "ProductID", header: "ID"), 
+                gridinstance.Column(columnName: "ProductName", header: "Product"),
+                gridinstance.Column(columnName: "UnitPrice", header: "$", 
+                    format: (item) => item.UnitPrice.ToString("0.00")),
+                gridinstance.Column(columnName: "DATE", canSort:false,
+                    format: (item) => item.Date.ToString("MMM dd, yyyy")),
+                gridinstance.Column(columnName: "Discontinued", header: "Disc", canSort: false,
+                    format: @<input name="Dicontinued" id="Discontinued" type="checkbox" value="@item.Discontinued"  
+                                    disabled="disabled" @(item.Discontinued == true ? "checked" : null)/>),
+                gridinstance.Column(header: "",
+                    format: @<text>
+                                <a href="~/DBPages/WebGridDestination?pid=@item.ProductID" onclick="return confirm('Are you sure you wish to view @item.ProductName?')">view</a>
+                            </text>)
+                ))
     </div>
 </div>
 

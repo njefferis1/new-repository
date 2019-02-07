@@ -1,0 +1,18 @@
+﻿@{
+    Layout = "~/_Layout.cshtml";
+    Page.Title = "WebGrid";
+
+    //access the argument label from the sending page using .QueryString["xxx"]
+    //QueryString returns either null (if argument did not exists) or
+    //   a string value
+    var pid = Request.QueryString["pid"];
+}
+@section banner{
+    <h1>DataBase: WebGrid Query Destination</h1>
+}
+
+<p>You passed the value @pid</p>
+
+@section footer{
+    &copy; CPSC1517 Nait 2019, all rights reserved
+}
