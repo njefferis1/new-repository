@@ -147,9 +147,19 @@
                 <option value="0">select ...</option>
                 @foreach (var supitem in supResults)
                 {
-                    <option value="@supitem.SupplierID">
-                        @supitem[1]
-                    </option>
+                    if(supitem[0].ToString() == selectedsupplier)
+                    {
+                        <option value="@supitem[0]" selected>
+                            @supitem[1]
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@supitem.SupplierID">
+                            @supitem[1]
+                        </option>
+                    }
+                    
                 }
             </select><br />
 
@@ -157,9 +167,19 @@
                 <option value="0">select ...</option>
                 @foreach (var catitem in catResults)
                 {
-                    <option value="@catitem.CategoryID">
-                        @catitem[1]
-                    </option>
+                    if(catitem[0].ToString() == selectedcategory)
+                    {
+                        <option value="@catitem[0]" selected>
+                            @catitem[1]
+                        </option>
+                    }
+                    else
+                    {
+                        <option value="@catitem.CategoryID">
+                            @catitem[1]
+                        </option>
+                    }
+                    
                 }
             </select><br />
 
