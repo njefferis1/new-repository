@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title=""  description="top level full menu group, do not display this node">
+    <siteMapNode url="~/Default.aspx" title="Home"  description="home page of this site" />
+    <siteMapNode url="~/About.aspx" title="About"  description="" />
+    <siteMapNode url="~/Contact.aspx" title="Contact"  description="" />
+    <!--creating a drop down menu
+      a) seperate open and close siteMapNode tags
+      b) a self closing siteMapNode tag for each sub menu item-->
+    <siteMapNode url="" title="SamplePages" description="">
+      <siteMapNode url="~/SamplePages/HelloWorld.aspx" title="Hello World"  description="" />
+      <siteMapNode url="~/SamplePages/BasicControls.aspx" title="Basic Controls"  description="" />
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

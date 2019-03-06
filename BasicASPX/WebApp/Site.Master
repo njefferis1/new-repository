@@ -46,19 +46,38 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                    <a class="navbar-brand" runat="server" href="~/">CPSC1517 ASP.Net</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
+                    <%--This is the startup supplied menu for new web application projects.
+                        To add a new menu item to THIS ul list; simply ad another li line item
+                        
+                        <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/SamplePages/FirstPage">Hello World</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
-                    </ul>
+                    </ul>--%>
+
+                    <%-- implementing a web.sitemap file which contains the web application menu
+                        
+                        a) from the Data group select the SiteMapDataSource control
+                        b) from the Navigation group select the menu control
+                            add the necessary attributes for linking to the data source and controling the menu styling--%>
+
+                    <asp:Menu ID="SiteNav" runat="server" 
+                         DataSourceID="SiteMapDS" Orientation="Horizontal" StaticDisplayLevels="1" 
+                         StaticMenuStyle-CssClass="nav navbar-nav" StaticSelectedStyle-CssClass="active"
+                         DynamicMenuStyle-CssClass="dropdown-menu" 
+                         IncludeStyleBlock="false" EnableTheming="false" EnableViewState="false">
+                    </asp:Menu>
+                    <asp:SiteMapDataSource ID="SiteMapDS" runat="server" 
+                         ShowStartingNode="false"/>
                 </div>
             </div>
         </div>
         <div class="container body-content">
+            <br /><br />
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
