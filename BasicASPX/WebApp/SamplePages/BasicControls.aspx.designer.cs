@@ -103,6 +103,15 @@ namespace WebApp.SamplePages {
         protected global::System.Web.UI.WebControls.DropDownList CollectionList;
         
         /// <summary>
+        /// SubmitChoiceTwo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SubmitChoiceTwo;
+        
+        /// <summary>
         /// OutputMessage control.
         /// </summary>
         /// <remarks>

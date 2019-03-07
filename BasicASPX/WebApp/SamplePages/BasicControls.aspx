@@ -6,7 +6,7 @@
             <td>
                 <asp:TextBox ID="TextBoxNumericChoice" runat="server" ToolTip="Enter a number from 1 to 4 representing the course choice"></asp:TextBox>
                 &nbsp;&nbsp;
-                <asp:Button ID="SubmitChoice" runat="server" Text="Submit Choice" />
+                <asp:Button ID="SubmitChoice" runat="server" Text="Submit Choice" OnClick="SubmitChoice_Click" />
             </td>
         </tr>
         <tr>
@@ -17,8 +17,8 @@
                 <asp:RadioButtonList ID="RadioButtonListChoice" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                     <asp:ListItem Value="1">COMP1008</asp:ListItem>
                     <asp:ListItem Value="2">CPSC1517</asp:ListItem>
-                    <asp:ListItem Value="3">DMIT1508</asp:ListItem>
-                    <asp:ListItem Value="4">DMIT2018</asp:ListItem>
+                    <asp:ListItem Value="4">DMIT1508</asp:ListItem>
+                    <asp:ListItem Value="3">DMIT2018</asp:ListItem>
                 </asp:RadioButtonList>
             </td>
         </tr>
@@ -45,6 +45,7 @@
             <td>
                 <asp:DropDownList ID="CollectionList" runat="server">
                 </asp:DropDownList>
+                <asp:Button ID="SubmitChoiceTwo" runat="server" OnClick="SubmitChoiceTwo_Click" Text="Submit" />
             </td>
         </tr>
         <tr>
