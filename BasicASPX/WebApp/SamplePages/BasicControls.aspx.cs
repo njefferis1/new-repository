@@ -113,11 +113,13 @@ namespace WebApp.SamplePages
 
         protected void SubmitChoiceTwo_Click(object sender, EventArgs e)
         {
-            string submitchoicetwo = CollectionList.Text;
+            string submitchoicetwo = CollectionList.SelectedValue;
 
-            if (string.IsNullOrEmpty(submitchoicetwo))
+            //validation: check for selection
+            //prompt is on physical row 1 (index = 0)
+            if (CollectionList.SelectedIndex == 0)
             {
-                OutputMessage.Text = "Enter a course from the drop down menu";
+                OutputMessage.Text = "Select a course from the drop down menu";
             }
             else
             {

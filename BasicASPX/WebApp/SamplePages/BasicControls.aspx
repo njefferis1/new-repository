@@ -45,6 +45,7 @@
             <td>
                 <asp:DropDownList ID="CollectionList" runat="server">
                 </asp:DropDownList>
+                &nbsp;&nbsp;
                 <asp:Button ID="SubmitChoiceTwo" runat="server" OnClick="SubmitChoiceTwo_Click" Text="Submit" />
             </td>
         </tr>
