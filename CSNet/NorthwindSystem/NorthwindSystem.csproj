@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7161326D-E655-4CB1-932A-FFA6E69907FF}</ProjectGuid>
+    <ProjectGuid>{4F6A4801-2DFD-4364-8FA6-21136697503C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>NorthwindSystem</RootNamespace>
@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\CategoryController.cs" />
     <Compile Include="BLL\ProductController.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="DAL\NorthwindContext.cs" />
@@ -55,7 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NorthwindSystem.Data\NorthwindSystem.Data.csproj">
-      <Project>{3c50e879-a196-4449-bc8b-56e206352b70}</Project>
+      <Project>{bb814b7a-1240-48b4-8daf-9820c896ec9c}</Project>
       <Name>NorthwindSystem.Data</Name>
     </ProjectReference>
   </ItemGroup>
@@ -63,6 +64,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

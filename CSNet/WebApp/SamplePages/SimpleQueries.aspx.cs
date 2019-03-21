@@ -16,7 +16,7 @@ namespace WebApp.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //clearout old messages
+            //clear out old messagess
             MessageLabel.Text = "";
         }
 
@@ -29,8 +29,8 @@ namespace WebApp.SamplePages
                 //  bad: message to user
                 MessageLabel.Text = "Enter a product id to search.";
             }
-            else if(int.TryParse(SearchArg.Text.Trim(), out productid))
-            {
+            else if (int.TryParse(SearchArg.Text.Trim(), out productid))
+            { 
                 //  good: process database request
                 try
                 {
@@ -39,9 +39,9 @@ namespace WebApp.SamplePages
                     //        issue request to controller
                     Product results = sysmgr.Product_Get(int.Parse(SearchArg.Text.Trim()));
                     //        check results: single record check is == null
-                    if(results == null)
+                    if (results == null)
                     {
-                        //           none:message user
+                        //           none: message to user
                         MessageLabel.Text = "No data found for supplied search value";
                     }
                     else
@@ -50,20 +50,24 @@ namespace WebApp.SamplePages
                         ProductID.Text = results.ProductID.ToString();
                         ProductName.Text = results.ProductName;
                     }
+                    
+                    
                 }
                 catch(Exception ex)
                 {
                     //  bad: message to user
                     MessageLabel.Text = ex.Message;
                 }
-                
+               
+               
             }
             else
             {
                 //  bad: message to user
                 MessageLabel.Text = "Product ID is not a number greater than 0";
             }
-
+            
+            
 
         }
 

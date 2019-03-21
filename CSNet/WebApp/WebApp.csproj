@@ -9,7 +9,7 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{97E5B561-3C36-48AF-AF59-90F8C530B084}</ProjectGuid>
+    <ProjectGuid>{FB88CF47-CC65-4EBC-92F5-6C53370B92AA}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -163,6 +163,7 @@
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="SamplePages\SimpleQueries.aspx" />
+    <Content Include="SamplePages\SqlProcQueries.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -233,6 +234,13 @@
     <Compile Include="SamplePages\SimpleQueries.aspx.designer.cs">
       <DependentUpon>SimpleQueries.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SamplePages\SqlProcQueries.aspx.cs">
+      <DependentUpon>SqlProcQueries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SamplePages\SqlProcQueries.aspx.designer.cs">
+      <DependentUpon>SqlProcQueries.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -271,11 +279,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NorthwindSystem.Data\NorthwindSystem.Data.csproj">
-      <Project>{3c50e879-a196-4449-bc8b-56e206352b70}</Project>
+      <Project>{bb814b7a-1240-48b4-8daf-9820c896ec9c}</Project>
       <Name>NorthwindSystem.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\NorthwindSystem\NorthwindSystem.csproj">
-      <Project>{7161326d-e655-4cb1-932a-ffa6e69907ff}</Project>
+      <Project>{4f6a4801-2dfd-4364-8fa6-21136697503c}</Project>
       <Name>NorthwindSystem</Name>
     </ProjectReference>
   </ItemGroup>
@@ -292,9 +300,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>50895</DevelopmentServerPort>
+          <DevelopmentServerPort>51221</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50895/</IISUrl>
+          <IISUrl>http://localhost:51221/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
