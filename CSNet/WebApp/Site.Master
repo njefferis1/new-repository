@@ -55,6 +55,7 @@
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <li><a runat="server" href="~/SamplePages/SimpleQueries">Simple Query</a></li>
                         <li><a runat="server" href="~/SamplePages/SqlProcQueries">Proc Query</a></li>
+                        <li><a runat="server" href="~/SamplePages/FilterSearches">Filter Searches</a></li>
                     </ul>
                 </div>
             </div>
