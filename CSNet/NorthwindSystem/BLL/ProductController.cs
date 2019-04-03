@@ -19,6 +19,8 @@ namespace NorthwindSystem.BLL
     //     data class ie. Product
     public class ProductController
     {
+        #region Queries
+        
         //create a method to find a specific record on the sql table
         //this will be done by the primary key
         //input: search argument value
@@ -126,5 +128,38 @@ namespace NorthwindSystem.BLL
                 return results.ToList();
             }
         }
-    }
-}
+        #endregion
+
+        #region Add, Update, Delete
+
+        //the Add method will me responsible for adding an instance of product to the database (via DbSet<T>)
+        //input: Instance of Product class
+        //output: optional, on a identity pKey, return the new pKey value
+        public int Product_Add(Product item)
+        {
+            //work will be done in a transaction block
+            using(var context = new NorthwindContext())
+            {
+                //step 1: staging
+                //the appropriate DbSet will be used to add the instance <T> to the database
+                //in this step the data is NOT yet on the database
+                //if your pkey is an identity, then the pkey value will NOT be set
+                context.Products.Add(item);
+
+                //step 2: commit add
+                //this command when executed will send your record to the database for processing
+                //this command when executed will cause ANY enitity validation to fire
+                //if this command is not executed then your add is rolled back
+                //if this command is executed but fails then your add is rolled back
+                //is this command is executed and your database objects, then your add is rolled back
+                //if this command is executed and no problems exist, your add will be committed.
+                context.SaveChanges();
+
+                //optionally you can return your new pkey value
+                //if your data is committed then the new pkey value will be in your instance at this time
+                return item.ProductID;
+            }
+        }
+        #endregion
+    }//eoc 
+}// eon (end of namespace)

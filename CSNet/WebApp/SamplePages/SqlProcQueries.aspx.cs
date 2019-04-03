@@ -73,9 +73,14 @@ namespace WebApp.SamplePages
                     if(results.Count() == 0)
                     {
                         //      no results: bad, not found message
-                        MessageLabel.Text = "No products found for requested category";
+                        //MessageLabel.Text = "No products found for requested category";   EmptyDataTemplate takes care of teh error message
+
                         //optionally: clear the previous successful data display
-                        CategoryProductList.DataSource = null;
+                        //CategoryProductList.DataSource = null;
+
+                        //If you have an EmptyDataTemplate, you can asign the emty dataset results to rhe GridView,
+                        //the empty dataset will trigger the display of the template
+                        CategoryProductList.DataSource = results;
                         CategoryProductList.DataBind();
                     }
                     else

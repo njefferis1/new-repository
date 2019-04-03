@@ -64,6 +64,9 @@
                                 <ItemStyle HorizontalAlign="Center" />
                             </asp:TemplateField>
                         </Columns>
+                        <EmptyDataTemplate> <!-- -->
+                            No products on file for selected category. 
+                        </EmptyDataTemplate>
                         <PagerSettings FirstPageText="Start" LastPageText="End" Mode="NumericFirstLast" PageButtonCount="3" />
                     </asp:GridView>
                 </td>
