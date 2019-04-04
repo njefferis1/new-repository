@@ -124,7 +124,7 @@ namespace WebApp.NorthwindPages
             int index = Int32.Parse(e.Item.Value);
             MultiView1.ActiveViewIndex = index;
         }
-
+        #region aaaa
         protected void CategoryList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CategoryList.SelectedIndex == 0)
@@ -248,7 +248,7 @@ namespace WebApp.NorthwindPages
                 }
             }
         }
-
+#endregion
         protected void FindTerritories_Click(object sender, EventArgs e)
         {
             if (RegionList.SelectedIndex == 0)
