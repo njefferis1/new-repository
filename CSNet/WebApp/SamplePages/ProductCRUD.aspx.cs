@@ -197,6 +197,7 @@ namespace WebApp.NorthwindPages
                         {
                             item.ReorderLevel = Int16.Parse(ReorderLevel.Text.Trim());
                         }
+                        //logically this is a new product NOT a discontinued product
                         item.Discontinued = false;
                         //connect to the appropriate BLL Controller for <T>
                         ProductController sysmgr = new ProductController();
@@ -204,7 +205,7 @@ namespace WebApp.NorthwindPages
                         int newProductID = sysmgr.Product_Add(item);
                         //process any returning information from the controller method and issue a success message
                         errormsgs.Add(ProductName.Text + " has been added to the database: ID = " + ProductID.ToString());
-                        LoadMessageDisplay(errormsgs, "alert aler-success");
+                        LoadMessageDisplay(errormsgs, "alert alert-success");
                         ProductID.Text = newProductID.ToString();
 
                         //you may need to refresh various controlls on your form
@@ -249,12 +250,219 @@ namespace WebApp.NorthwindPages
 
         protected void UpdateProduct_Click(object sender, EventArgs e)
         {
+            //if (Page.IsValid)
+            //{
+            //any other logical validation for your data
+            //in this example, I will assume that the foreign keys SupplierID and CategoryID are required
+            if (SupplierList.SelectedIndex == 0)
+            {
+                errormsgs.Add("Select a supplier");
+            }
+            if (CategoryList.SelectedIndex == 0)
+            {
+                errormsgs.Add("select a category");
+            }
 
+            //on the update, you must have the pkey of the record that is being processed
+            if (string.IsNullOrEmpty(ProductID.Text.Trim()))
+            {
+                errormsgs.Add("Search for the product you wish to maintain.");
+            }
+            //check if all logical validation was successful
+            if (errormsgs.Count() > 0)
+            {
+                //some bad validation
+                LoadMessageDisplay(errormsgs, "alert alert-info");
+            }
+            else
+            {
+                //assume your validation is successful and you can procede with adding the data to the database
+                //try/catch
+                try
+                {
+                    //create an instance of your <T>
+                    Product item = new Product();
+                    //extract data from form and load your instance of <T>
+
+                    //in addition to the non-pkey fields being accessed and loaded, the pkey value MUST also be loaded
+                    item.ProductID = int.Parse(ProductID.Text.Trim());
+
+                    item.ProductName = ProductName.Text.Trim();
+                    item.SupplierID = int.Parse(SupplierList.SelectedValue);
+                    item.CategoryID = int.Parse(CategoryList.SelectedValue);
+                    item.QuantityPerUnit = string.IsNullOrEmpty(QuantityPerUnit.Text.Trim()) ? null : QuantityPerUnit.Text.Trim();
+                    if (string.IsNullOrEmpty(UnitPrice.Text.Trim()))
+                    {
+                        item.UnitPrice = null;
+                    }
+                    else
+                    {
+                        item.UnitPrice = decimal.Parse(UnitPrice.Text.Trim());
+                    }
+                    if (string.IsNullOrEmpty(UnitsInStock.Text.Trim()))
+                    {
+                        item.UnitsInStock = null;
+                    }
+                    else
+                    {
+                        item.UnitsInStock = Int16.Parse(UnitsInStock.Text.Trim());
+                    }
+                    if (string.IsNullOrEmpty(UnitsOnOrder.Text.Trim()))
+                    {
+                        item.UnitsOnOrder = null;
+                    }
+                    else
+                    {
+                        item.UnitsOnOrder = Int16.Parse(UnitsOnOrder.Text.Trim());
+                    }
+                    if (string.IsNullOrEmpty(ReorderLevel.Text.Trim()))
+                    {
+                        item.ReorderLevel = null;
+                    }
+                    else
+                    {
+                        item.ReorderLevel = Int16.Parse(ReorderLevel.Text.Trim());
+                    }
+                    //during an update, you need to take the actual value that is in the field
+                    item.Discontinued = Discontinued.Checked; ;
+                    //connect to the appropriate BLL Controller for <T>
+                    ProductController sysmgr = new ProductController();
+                    //issue the appropriate BLL controller method to process <T>
+                    int rowsaffected = sysmgr.Product_Update(item);
+                    //process any returning information from the controller method and issue a success message
+                    //did the database REALLY get updated
+                    if(rowsaffected == 0)
+                    {
+                        errormsgs.Add(ProductName.Text + " has not been updated. Search for the product again.");
+                        LoadMessageDisplay(errormsgs, "alert alert-warning");
+                        BindProductList();
+                    }
+                    else
+                    {
+                        errormsgs.Add(ProductName.Text + " has been updated");
+                        LoadMessageDisplay(errormsgs, "alert alert-success");
+                        BindProductList();
+                        ProductList.SelectedValue = ProductID.Text;
+                    }
+                    
+                    
+
+                    //you may need to refresh various controlls on your form
+                    
+
+                }
+                catch (DbUpdateException ex)
+                {
+                    UpdateException updateException = (UpdateException)ex.InnerException;
+                    if (updateException.InnerException != null)
+                    {
+                        errormsgs.Add(updateException.InnerException.Message.ToString());
+                    }
+                    else
+                    {
+                        errormsgs.Add(updateException.Message);
+                    }
+                    LoadMessageDisplay(errormsgs, "alert alert-danger");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            errormsgs.Add(validationError.ErrorMessage);
+                        }
+                    }
+                    LoadMessageDisplay(errormsgs, "alert alert-danger");
+                }
+                catch (Exception ex)
+                {
+                    errormsgs.Add(GetInnerException(ex).ToString());
+                    LoadMessageDisplay(errormsgs, "alert alert-danger");
+                }
+
+            }
+            //}
         }
 
         protected void RemoveProduct_Click(object sender, EventArgs e)
         {
+            //on the delete, you must have the pkey of the record that is being processed
+            if (string.IsNullOrEmpty(ProductID.Text.Trim()))
+            {
+                errormsgs.Add("Search for the product you wish to maintain.");
+            }
+            //check if all logical validation was successful
+            if (errormsgs.Count() > 0)
+            {
+                //some bad validation
+                LoadMessageDisplay(errormsgs, "alert alert-info");
+            }
+            else
+            {
+                //assume your validation is successful and you can procede with deleting the data to the database
+                //try/catch
+                try
+                {
+                    //connect to the appropriate BLL Controller for <T>
+                    ProductController sysmgr = new ProductController();
+                    //issue the appropriate BLL controller method to process <T>
+                    int rowsaffected = sysmgr.Product_Delete(int.Parse(ProductID.Text.Trim()));
+                    //process any returning information from the controller method and issue a success message
+                    //did the database REALLY get updated
+                    if (rowsaffected == 0)
+                    {
+                        errormsgs.Add(ProductName.Text + " has not been deleted. Search for the product again.");
+                        LoadMessageDisplay(errormsgs, "alert alert-warning");
+                        BindProductList();
+                    }
+                    else
+                    {
+                        errormsgs.Add(ProductName.Text + " has been discontinued");
+                        LoadMessageDisplay(errormsgs, "alert alert-success");
+                        BindProductList();
+                        //dependant on whether the record is a physical or logical delete
 
+                        //kept for logical
+                        Discontinued.Checked = true;
+                        ProductList.SelectedValue = ProductID.Text;
+
+                        //on a physical delete, optionally clear the fields
+                        //Clear_Click(sender, new EventArgs());
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    UpdateException updateException = (UpdateException)ex.InnerException;
+                    if (updateException.InnerException != null)
+                    {
+                        errormsgs.Add(updateException.InnerException.Message.ToString());
+                    }
+                    else
+                    {
+                        errormsgs.Add(updateException.Message);
+                    }
+                    LoadMessageDisplay(errormsgs, "alert alert-danger");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            errormsgs.Add(validationError.ErrorMessage);
+                        }
+                    }
+                    LoadMessageDisplay(errormsgs, "alert alert-danger");
+                }
+                catch (Exception ex)
+                {
+                    errormsgs.Add(GetInnerException(ex).ToString());
+                    LoadMessageDisplay(errormsgs, "alert alert-danger");
+                }
+
+            }
+            //}
         }
     }
 }
