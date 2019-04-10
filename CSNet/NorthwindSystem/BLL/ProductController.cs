@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using NorthwindSystem.Data; //the .Data class
 using NorthwindSystem.DAL;  //the DAL context class
 using System.Data.SqlClient;//required for SqlParamter()
+using System.ComponentModel;
 #endregion
 
 namespace NorthwindSystem.BLL
@@ -17,6 +18,7 @@ namespace NorthwindSystem.BLL
     //these classes will be called by your webapp
     //for ease of maintenance, each class will represent a specific
     //     data class ie. Product
+    [DataObject]
     public class ProductController
     {
         #region Queries
@@ -45,6 +47,7 @@ namespace NorthwindSystem.BLL
         //Obtain a list of all table records
         //input: none
         //output: List<T> where <T> is the appropriate data class (Product)
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Product> Product_List()
         {
             using (var context = new NorthwindContext())
@@ -62,6 +65,7 @@ namespace NorthwindSystem.BLL
         //argumants are specified using new SqlParameter(parametername, value)
         //each required argument needs a SqlParameter()
         //SqlParameter() needs a using clause System.Data.SqlClient
+        [DataObjectMethod(DataObjectMethodType.Select, false)]
         public List<Product> Product_GetByCategories(int categoryid)
         {
             using(var context = new NorthwindContext())
@@ -135,6 +139,7 @@ namespace NorthwindSystem.BLL
         //the Add method will me responsible for adding an instance of product to the database (via DbSet<T>)
         //input: Instance of Product class
         //output: optional, on a identity pKey, return the new pKey value
+        [DataObjectMethod(DataObjectMethodType.Insert, false)]
         public int Product_Add(Product item)
         {
             //work will be done in a transaction block
